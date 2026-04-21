@@ -1,6 +1,6 @@
 pipeline {
     // agent label
-    agent { label 'calc_backend_nodejs_ci_label' }
+    agent { label 'backend_ci' }
 
     // environment variables 
     // these global variables can be accessed in all stages
@@ -18,18 +18,6 @@ pipeline {
                     def packageJson = readJSON file: 'package.json'
                     env.APP_VERSION = packageJson.version
                 }
-            }
-        }
-        // Install dependencies
-        stage("Install dependencies") {
-            steps {
-                sh 'sudo npm install -y'
-            }
-        }
-        // Build the docker image
-        stage("Build docker image") {
-            steps {
-                sh "docker build -t ${env.PROJECT_NAME}/${env.COMPONENT_NAME}:${env.APP_VERSION} ."
             }
         }
     }
