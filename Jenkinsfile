@@ -28,5 +28,12 @@ pipeline {
                 }
             }
         }
+        stage("Build Docker Image"){
+            steps {
+                script {
+                    sh "docker build -t ${PROJECT_NAME}_${COMPONENT_NAME}:${APP_VERSION} ."
+                }
+            }
+        }
     }
 }
