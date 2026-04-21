@@ -23,7 +23,7 @@ pipeline {
         // Install dependencies
         stage("Install dependencies") {
             steps {
-                sh 'npm install'
+                sh 'sudo npm install'
             }
         }
         // Build the docker image
