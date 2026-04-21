@@ -32,13 +32,6 @@ pipeline {
                 sh "docker build -t ${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION} ."
             }
         }
-        // Push the docker image to ECR
-        stage("Push docker image to ECR"){
-            steps{
-
-            }
-        }
-    
 }
 }
 }
