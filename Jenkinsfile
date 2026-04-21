@@ -47,8 +47,8 @@ pipeline {
                     // Login to ECR
                     sh """
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
-                    
-                    docker push "${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION}"
+                    docker tag ${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION} ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION}
+                    docker push ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION}
                     """
                 }
                 }
