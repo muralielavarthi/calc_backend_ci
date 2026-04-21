@@ -1,8 +1,8 @@
 pipeline {
     // agent label
-    agent {label 'calc_backend_nodejs_ci_label'}
+    agent { label 'calc_backend_nodejs_ci_label' }
 
-    // project environment variables
+    // environment variables 
     // these global variables can be accessed in all stages
     environment {
         PROJECT_NAME = 'calc'
@@ -12,14 +12,14 @@ pipeline {
     // stages
     stages {
         // read version from package.json and set it to env.APP_VERSION
-        stage("Read Version"){
-             steps {
+        stage("Read Version") {
+            steps {
                 script {
-                    // groovy code
                     def packageJson = readJSON file: 'package.json'
                     env.APP_VERSION = packageJson.version
                 }
             }
+        }
         // Install dependencies
         stage("Install dependencies") {
             steps {
@@ -32,6 +32,5 @@ pipeline {
                 sh "docker build -t ${PROJECT_NAME}/${COMPONENT_NAME}:${APP_VERSION} ."
             }
         }
-}
-}
+    }
 }
